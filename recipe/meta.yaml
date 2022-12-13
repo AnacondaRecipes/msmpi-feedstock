@@ -20,6 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ compiler('m2w64_fortran') }}
+    - perl
   run:
     - mpi 1.0 msmpi
 
