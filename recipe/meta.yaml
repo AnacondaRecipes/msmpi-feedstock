@@ -22,8 +22,8 @@ requirements:
     - {{ compiler('m2w64_fortran') }}
     - perl
     - 7zip
-  # run:
-  #   - mpi 1.0 msmpi
+  run:
+    - mpi 1.0 msmpi
 
 test:
   files:
