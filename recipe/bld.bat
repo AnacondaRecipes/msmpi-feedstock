@@ -6,6 +6,13 @@ if "%ARCH%"=="32" (
 
 @REM Install Microsoft.VisualStudio.Component.VC.Runtimes.x86.x64.Spectre
 START /WAIT "" "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools" --passive --add Microsoft.VisualStudio.Component.VC.Runtimes.x86.x64.Spectre
+
+@REM Install dot NET core 2.1.818 using dotnet-install scripts
+curl -L -o %BUILD_PREFIX%/dotnet-install.ps1 https://dot.net/v1/dotnet-install.ps1
+powershell %BUILD_PREFIX%/dotnet-install.ps1 -InstallDir %BUILD_PREFIX%/dotnet -Version 2.1.818
+set PATH=%BUILD_PREFIX%/dotnet;%BUILD_PREFIX%\dotnet\sdk\2.1.818;%PATH%
+set MSBuildSDKsPath=%BUILD_PREFIX%\dotnet\sdk\2.1.818\Sdks
+
 msbuild.exe /p:Platform=%PLATFORM% /p:Configuration=Release
 
 for /r %SRC_DIR%\out\Release-%PLATFORM% %%f in (*.exe) do @copy "%%f" %LIBRARY_BIN%
