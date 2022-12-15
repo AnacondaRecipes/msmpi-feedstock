@@ -22,6 +22,7 @@ requirements:
     - {{ compiler('m2w64_fortran') }}
     - perl
     - 7zip
+    - m2-patch  # [win]
   run:
     - mpi 1.0 msmpi
 
