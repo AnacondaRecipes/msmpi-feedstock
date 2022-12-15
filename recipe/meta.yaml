@@ -1,3 +1,35 @@
+# -----------------------------------------------------------------------------
+#  *** Important ****
+# This package currently needs to be built manually. There are build tools injected
+# into the Visual Studio toolchain that have the potential to mess up builders.
+# Once the appropriate versions of WDK, .NET core, and VC++ 2017 version 15.9 v14.16 Libs for Spectre (x86 and x64)
+# have been added to the Windows builder image, this reccipe will need to be modified.
+# 
+# When Building This package:
+# - Take care to create PRs with "CI skip" in the title.
+#     - This will cause CI to not run on PR creation, new commits, OR on final merge
+#     - See https://github.com/AnacondaRecipes/msmpi-feedstock/pull/1 for an example
+# 
+# Building on a dev instace:
+# https://github.com/anaconda-distribution/perseverance-skills/blob/8c2c9dd826416c0f4695097528c8952373431bb6/sections/Package_building/More_debugging/Dev_machine_instances.md#initializing-an-ec2-instance
+# 
+# 1. Spin up a Windows dev instance per the instructions above. GUI instance may be helpful.
+# 2. Right click "Anaconda Prompt (miniconda3)" in the start menu
+# 3. Select more->Run as Administrator
+# 4. `conda create -n build git m2-base conda-build conda-package-handling`
+# 5. `conda activate build`
+# 6. `cd C:\Users\dev-admin\Desktop`
+# 7. `git clone https://github.com/AnacondaRecipes/aggregate.git`
+# 8. `cd aggregate`
+# 9. `git submodule update --init msmpi-feedstock`
+# 10. `cd msmpi-feedstock && git checkout {{YOUR_BRANCH}} && cd ..`
+# 11. `conda build msmpi-feedstock --croot ../croot`
+# 12. Ensure build was successfull
+# 13. `cd ..`
+# 14. `cp ./croot/win-64/msmpi-*.tar.bz2 .`
+# 15. cph transmute msmpi-*.tar.bz2 .conda
+# ------------------------------------------------------------------------------
+
 {% set name = "msmpi" %}
 {% set version = "10.1.1" %}
 
